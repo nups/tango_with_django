@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Rango</title>
+    </head>
+    <body>
+    <h1>Rango says...</h1>
+    <div>
+        {% if user.is_authenticated %}
+            howdy {{ user.username }}!
+        {% else %} h
+            hey there partner!
+        {% endif %}
+        <br />
+        <strong>{{ boldmessage }}</strong><br />
+    </div>
+    <div>
+        <h2>Most liked Categories</h2>
+        {% if categories %}
+            <ul>
+                {% for category in categories %}
+                <li>
+                    <a href="/rango/category/{{category.slug}}">{{ category.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no categories present till now.</strong>
+        {% endif %}
+        {% if pages %}
+        <h2>Most viewed pages</h2>
+            <ul>
+                {% for page in pages %}
+                <li>
+                    <a href="{{page.url}}">{{ page.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no pages present till now.</strong>
+        {% endif %}
+    </div>
+    <div>
+        <a href ='/rango/add_category/'>Add a new category</a>
+    </div>
+    <div>
+        <img src="{% static '/images/books.jpg' %}" alt="Picture of Rango"/>
+        <a href="/rango/about/">About</a><br />
+    </div>
+    </body>
+</html>
+
